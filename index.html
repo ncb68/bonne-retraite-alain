@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bonne retraite Alain</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Lora:ital,wght@0,500;1,500&family=Special+Elite&family=Black+Ops+One&display=swap">
+<style>
+/*
+VOICE: complice et drôle, puis chaleureux — une blague entre collègues qui finit en fête
+IDEA: un dossier confidentiel « business » qu'on déverrouille, puis la retraite qui charge
+PICTURE: écran de dossier secret, barre de chargement, tampon, puis ciel de feux d'artifice
+COLOUR and TYPE: nuit profonde, papier kraft pour le dossier, rouge tampon, or; Special Elite, Black Ops One, Dancing Script, Lora
+LAYOUT: une scène plein écran par étape, centrée, une seule action à la fois
+*/
+:root{color-scheme:dark;--bg:#070a1a;--ink:#fbf6ec;--gold:#ffd27a;--kraft:#e9d9b4;--kink:#2b2112;--red:#c8221c}
+*{box-sizing:border-box;min-width:0}
+html,body{height:100%}
+body{margin:0;background:radial-gradient(ellipse at 50% 120%,#1b2350 0%,#0b1030 45%,var(--bg) 100%);color:var(--ink);font:17px/1.6 Lora,Georgia,serif;overflow:hidden;-webkit-tap-highlight-color:transparent}
+canvas{position:fixed;inset:0;width:100%;height:100%;display:block}
+.stage{position:fixed;inset:0;z-index:2;display:grid;place-items:center;padding:24px 18px;opacity:0;visibility:hidden;transition:opacity .6s ease,visibility 0s linear .6s}
+.stage.on{opacity:1;visibility:visible;transition:opacity .6s ease}
+/* dossier */
+.folder{width:min(420px,100%);background:var(--kraft);color:var(--kink);border-radius:6px 6px 10px 10px;padding:34px 26px 26px;position:relative;box-shadow:0 24px 60px rgba(0,0,0,.55);font-family:"Special Elite",monospace;text-align:center}
+.folder::before{content:"";position:absolute;top:-16px;left:18px;width:130px;height:20px;background:var(--kraft);border-radius:8px 8px 0 0}
+.conf{display:inline-block;font:400 22px/1 "Black Ops One",sans-serif;color:var(--red);border:3px solid var(--red);padding:6px 12px;transform:rotate(-4deg);margin-bottom:18px;letter-spacing:.04em}
+.folder h2{font:400 20px/1.3 "Special Elite",monospace;margin:0 0 6px}
+.folder .sub{font-size:15px;margin:0 0 18px;opacity:.8}
+form{display:flex;flex-direction:column;gap:10px}
+input{font:16px "Special Elite",monospace;padding:12px 14px;border:2px solid var(--kink);border-radius:6px;background:#fffaf0;color:var(--kink);text-align:center;min-height:48px}
+input:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+.btn{font:600 16px Lora,serif;color:#1a1204;background:var(--gold);border:0;border-radius:999px;padding:12px 26px;min-height:46px;cursor:pointer;box-shadow:0 6px 20px rgba(255,190,90,.35)}
+.folder .btn{background:var(--kink);color:var(--kraft);box-shadow:none;border-radius:6px}
+.btn:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.msg{min-height:44px;margin-top:12px;font-size:15px;color:var(--red)}
+.shake{animation:shake .4s}
+@keyframes shake{20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
+/* chargement */
+.load{width:min(460px,100%);text-align:center;font-family:"Special Elite",monospace}
+.load h2{font:400 22px/1.3 "Special Elite",monospace;margin:0 0 20px;color:var(--ink)}
+.bar{height:26px;border-radius:999px;background:rgba(255,255,255,.1);overflow:hidden;box-shadow:inset 0 0 0 1px rgba(255,255,255,.2)}
+.fill{height:100%;width:0;background:linear-gradient(90deg,#ffb347,var(--gold));border-radius:999px;transition:width .35s ease}
+.pct{font:400 44px/1 "Black Ops One",sans-serif;margin:18px 0 8px;color:var(--gold)}
+.status{min-height:56px;font-size:16px}
+.status.err{color:#ff7a70}
+/* tampon */
+.stamp{font:400 clamp(30px,9vw,54px)/1.05 "Black Ops One",sans-serif;color:var(--red);border:6px solid var(--red);border-radius:10px;padding:14px 22px;text-align:center;transform:rotate(-12deg) scale(4);opacity:0;background:rgba(233,217,180,.92);box-shadow:0 20px 50px rgba(0,0,0,.5)}
+.stamp small{display:block;font:400 clamp(15px,4vw,20px)/1.3 "Special Elite",monospace;margin-top:8px;color:var(--kink)}
+.stage.on .stamp{animation:thump .45s cubic-bezier(.2,.9,.3,1.2) forwards}
+@keyframes thump{to{transform:rotate(-12deg) scale(1);opacity:1}}
+.quake{animation:quake .35s}
+@keyframes quake{25%{transform:translate(4px,-3px)}50%{transform:translate(-4px,3px)}75%{transform:translate(3px,2px)}}
+/* message */
+.card{max-width:560px;text-align:center;padding:clamp(24px,5vw,44px) clamp(20px,5vw,40px);border-radius:22px;background:rgba(7,10,26,.55);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);box-shadow:0 0 0 1px rgba(255,210,122,.18),0 20px 60px rgba(0,0,0,.45);transform:translateY(18px) scale(.97);transition:transform 1.4s ease;max-height:calc(100vh - 32px);overflow:auto}
+.stage.on .card{transform:none}
+#s4{pointer-events:none}#s4 .card{pointer-events:auto}
+h1{font:700 clamp(44px,12vw,76px)/1.05 "Dancing Script",cursive;color:var(--gold);margin:0 0 14px;text-shadow:0 0 24px rgba(255,190,90,.45)}
+.card p{margin:0 0 14px;font-size:clamp(17px,4.4vw,20px);text-wrap:pretty}
+.big{font-style:italic;color:var(--gold)}
+.sig{font:700 34px/1 "Dancing Script",cursive;margin-top:18px}
+.ps{font-size:15px!important;opacity:.85;margin-top:16px!important}
+.card .btn{margin-top:20px}
+.hint{font-size:13px;opacity:.7;margin-top:12px}
+@media(prefers-reduced-motion:reduce){.stage,.card{transition:none}.stage.on .stamp{animation:none;transform:rotate(-12deg);opacity:1}.shake,.quake{animation:none}}
+</style>
+</head>
+<body>
+<canvas id="sky"></canvas>
+
+<section class="stage on" id="s1">
+  <div class="folder" id="folder">
+    <div class="conf">CONFIDENTIEL</div>
+    <h2>Dossier : Alain</h2>
+    <p class="sub">Accès réservé. Entre le mot de passe.</p>
+    <form id="lock" autocomplete="off">
+      <input id="pw" type="text" inputmode="text" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Mot de passe" aria-label="Mot de passe">
+      <button class="btn" type="submit">Ouvrir le dossier</button>
+    </form>
+    <div class="msg" id="msg" aria-live="polite"></div>
+  </div>
+</section>
+
+<section class="stage" id="s2" aria-live="polite">
+  <div class="load">
+    <h2>Chargement de la retraite…</h2>
+    <div class="bar"><div class="fill" id="fill"></div></div>
+    <div class="pct" id="pct">0 %</div>
+    <div class="status" id="status">Initialisation du canapé…</div>
+  </div>
+</section>
+
+<section class="stage" id="s3">
+  <div class="stamp">FIN DE MISSION<br>D'INTÉRIM<small>après des années de service</small></div>
+</section>
+
+<section class="stage" id="s4">
+  <div class="card">
+    <h1>Alain,</h1>
+    <p>Des années à tes côtés sans un seul nuage.</p>
+    <p>Merci pour tout ce que tu m'as appris et pour la bonne humeur que tu apportais chaque nuit.</p>
+    <p>Pour le « business », tu sais où me trouver !</p>
+    <p class="big">Profite bien de ta retraite, l'intérimaire.</p>
+    <div class="sig">Ahmed</div>
+    <p class="ps">PS : la hotline Ahmed reste ouverte, même pour les retraités.</p>
+    <button class="btn" id="more" type="button">Encore ! 🎆</button>
+    <div class="hint">Touche le ciel pour lancer une fusée</div>
+  </div>
+</section>
+
+<script>
+{
+const $=id=>document.getElementById(id);
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const show=id=>{for(const s of document.querySelectorAll('.stage'))s.classList.toggle('on',s.id===id)};
+
+/* ---- feux d'artifice ---- */
+const cv=$('sky'),cx=cv.getContext('2d');
+let W=0,H=0,running=false,party=false;const rockets=[],sparks=[];
+const hues=[45,0,330,200,130,280,20];
+function size(){const d=Math.min(devicePixelRatio||1,2);W=innerWidth;H=innerHeight;cv.width=W*d;cv.height=H*d;cx.setTransform(d,0,0,d,0,0)}
+size();addEventListener('resize',size);
+function launch(tx,ty){
+  const x=tx??W*(.15+Math.random()*.7),y=ty??H*(.12+Math.random()*.35);
+  rockets.push({x:x+(Math.random()-.5)*40,y:H,tx:x,ty:y,h:hues[Math.floor(Math.random()*hues.length)]});
+}
+function burst(r){
+  const n=70+Math.floor(Math.random()*50),ring=Math.random()<.35;
+  for(let i=0;i<n;i++){
+    const a=Math.PI*2*i/n+Math.random()*.1,s=ring?3.2:Math.random()*4+1;
+    sparks.push({x:r.tx,y:r.ty,vx:Math.cos(a)*s,vy:Math.sin(a)*s,life:1,decay:.011+Math.random()*.012,h:Math.random()<.2?45:r.h,tw:Math.random()<.3});
+  }
+}
+function tick(){
+  cx.globalCompositeOperation='destination-out';cx.fillStyle='rgba(0,0,0,.18)';cx.fillRect(0,0,W,H);
+  cx.globalCompositeOperation='lighter';
+  for(let i=rockets.length-1;i>=0;i--){
+    const r=rockets[i];r.y-=Math.max(4,(r.y-r.ty)*.045);r.x+=(r.tx-r.x)*.04;
+    cx.fillStyle=`hsl(${r.h},100%,80%)`;cx.beginPath();cx.arc(r.x,r.y,2.2,0,7);cx.fill();
+    if(r.y-r.ty<6){burst(r);rockets.splice(i,1)}
+  }
+  for(let i=sparks.length-1;i>=0;i--){
+    const p=sparks[i];p.vx*=.985;p.vy=p.vy*.985+.045;p.x+=p.vx;p.y+=p.vy;p.life-=p.decay;
+    if(p.life<=0){sparks.splice(i,1);continue}
+    cx.fillStyle=`hsla(${p.h},100%,${55+p.life*25}%,${p.tw?Math.random()*p.life:p.life})`;
+    cx.beginPath();cx.arc(p.x,p.y,1.4+p.life*1.4,0,7);cx.fill();
+  }
+  requestAnimationFrame(tick);
+}
+function salvo(n,gap){if(reduce)return;for(let i=0;i<n;i++)setTimeout(()=>launch(),i*gap)}
+function startFireworks(){
+  party=true;if(reduce)return;
+  if(!running){running=true;requestAnimationFrame(tick)}
+  salvo(10,220);
+  setInterval(()=>{if(!document.hidden&&rockets.length<3)launch()},1400);
+}
+
+/* ---- étape 1 : mot de passe ---- */
+let tries=0;
+const norm=s=>s.normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/[^a-z]/g,'');
+const good=['business','buisness','busines','bisness','bizness','buissness'];
+const nope=['Accès refusé. Essaie encore.','Toujours pas… réfléchis bien.','Indice : le mot qu’on disait au boulot pour que les collègues ne comprennent pas 😉','Dernier indice : ça commence par « B » et ça finit par « ness »…'];
+$('lock').addEventListener('submit',e=>{
+  e.preventDefault();
+  const v=norm($('pw').value);
+  if(!v)return;
+  if(good.includes(v)){$('pw').blur();$('msg').textContent='Accès autorisé ✔';setTimeout(loading,700);return}
+  $('msg').textContent=nope[Math.min(tries,nope.length-1)];tries++;
+  const f=$('folder');f.classList.remove('shake');void f.offsetWidth;f.classList.add('shake');
+  $('pw').value='';
+});
+
+/* ---- étape 2 : chargement ---- */
+const steps=[
+  [12,'Initialisation du canapé…',600],
+  [37,'Désactivation du réveil de nuit…',900],
+  [58,'Installation des grasses matinées…',900],
+  [82,'Transfert des astuces à Ahmed…',900],
+  [99,'Presque…',1000],
+  [99,'⚠ Erreur : l’intérimaire est encore sur le terrain',2200,true],
+  [99,'Retour forcé au vestiaire…',1100],
+  [100,'Retraite installée avec succès ✔',1000]
+];
+function loading(){
+  show('s2');let i=0;
+  const next=()=>{
+    if(i>=steps.length){stamp();return}
+    const [p,t,d,err]=steps[i++];
+    $('fill').style.width=p+'%';$('pct').textContent=p+' %';
+    $('status').textContent=t;$('status').classList.toggle('err',!!err);
+    setTimeout(next,d);
+  };
+  next();
+}
+
+/* ---- étape 3 : tampon ---- */
+function stamp(){
+  show('s3');
+  setTimeout(()=>{document.body.classList.remove('quake');void document.body.offsetWidth;document.body.classList.add('quake')},380);
+  setTimeout(()=>{show('s4');startFireworks()},2300);
+}
+
+/* ---- étape 4 : message ---- */
+$('more').addEventListener('click',e=>{e.stopPropagation();salvo(12,170)});
+addEventListener('pointerdown',e=>{if(!party||reduce||e.target.closest('button,.card'))return;launch(e.clientX,e.clientY)});
+}
+</script>
+</body>
+</html>
