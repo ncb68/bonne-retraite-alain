@@ -164,7 +164,7 @@ $('lock').addEventListener('submit',e=>{
   e.preventDefault();
   const v=norm($('pw').value);
   if(!v)return;
-  if(good.includes(v)){$('pw').blur();$('msg').textContent='Accès autorisé ✔';setTimeout(loading,700);return}
+  if(good.includes(v)){$('pw').blur();$('msg').textContent='Accès autorisé ✔';setTimeout(loading,2000);return}
   $('msg').textContent=nope[Math.min(tries,nope.length-1)];tries++;
   const f=$('folder');f.classList.remove('shake');void f.offsetWidth;f.classList.add('shake');
   $('pw').value='';
@@ -172,14 +172,14 @@ $('lock').addEventListener('submit',e=>{
 
 /* ---- étape 2 : chargement ---- */
 const steps=[
-  [12,'Initialisation du canapé…',600],
-  [37,'Désactivation du réveil de nuit…',900],
-  [58,'Installation des grasses matinées…',900],
-  [82,'Transfert des astuces à Ahmed…',900],
-  [99,'Presque…',1000],
-  [99,'⚠ Erreur : l’intérimaire est encore sur le terrain',2200,true],
-  [99,'Retour forcé au vestiaire…',1100],
-  [100,'Retraite installée avec succès ✔',1000]
+  [12,'Initialisation du canapé…',2600],
+  [37,'Désactivation du réveil de nuit…',2900],
+  [58,'Installation des grasses matinées…',2900],
+  [82,'Transfert des astuces à Ahmed…',2900],
+  [99,'Presque…',3000],
+  [99,'⚠ Erreur : l’intérimaire est encore sur le terrain',4200,true],
+  [99,'Retour forcé au vestiaire…',3100],
+  [100,'Retraite installée avec succès ✔',3000]
 ];
 function loading(){
   show('s2');let i=0;
